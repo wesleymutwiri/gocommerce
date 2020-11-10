@@ -8,6 +8,7 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/julienschmidt/httprouter"
+	_ "github.com/lib/pq"
 	"github.com/wesleymutwiri/gocommerce/api/models"
 )
 
@@ -18,8 +19,7 @@ type Server struct {
 
 func (server *Server) Initialize(Dbdriver, DbUser, DbPassword, DbPort, DbHost, DbName string) {
 	var err error
-	Dbdriver = "postgres"
-	DBURL := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", DbHost, DbPort, DbUser, DbName, DbPassword)
+	DBURL := fmt.Sprintf("user=%s password=%s dbname=%s port=%s sslmode=disable", DbUser, DbPassword, DbName, DbPort)
 	server.DB, err = gorm.Open(Dbdriver, DBURL)
 	if err != nil {
 		fmt.Printf("Cannot connect to %s database", Dbdriver)

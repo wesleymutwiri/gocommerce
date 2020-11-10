@@ -12,6 +12,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+
 type User struct {
 	ID        uint32    `gorm:"primary_key;auto_increment" json:"id"`
 	Username  string    `gorm:"size:255;not null;unique" jsons:"nickname"`
@@ -45,6 +46,7 @@ func (u *User) Prepare() {
 	u.CreatedAt = time.Now()
 	u.UpdatedAt = time.Now()
 }
+
 
 func (u *User) Validate(action string) error {
 	switch strings.ToLower(action) {

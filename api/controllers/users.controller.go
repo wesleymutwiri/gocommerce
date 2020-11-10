@@ -17,7 +17,7 @@ import (
 	"github.com/wesleymutwiri/gocommerce/api/responses"
 )
 
-func (server *Server) CreateUser(w http.ResponseWriter, r *http.Request) {
+func (server *Server) CreateUser(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		responses.ERROR(w, http.StatusUnprocessableEntity, err)
@@ -46,7 +46,7 @@ func (server *Server) CreateUser(w http.ResponseWriter, r *http.Request) {
 	responses.JSON(w, http.StatusCreated, userCreated)
 }
 
-func (server *Server) GetUsers(w http.ResponseWriter, r *http.Request) {
+func (server *Server) GetUsers(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	user := models.User{}
 	users, err := user.FindAllUsers(server.DB)
 	if err != nil {

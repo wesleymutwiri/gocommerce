@@ -1,6 +1,8 @@
 package controllers
 
-import "github.com/wesleymutwiri/gocommerce/api/middlewares"
+import (
+	"github.com/wesleymutwiri/gocommerce/api/middlewares"
+)
 
 func (s *Server) initializeRoutes() {
 	s.Router.GET("/", middlewares.SetMiddlewareJSON(s.Home))
@@ -10,5 +12,4 @@ func (s *Server) initializeRoutes() {
 	s.Router.GET("/users/:id", middlewares.SetMiddlewareJSON(s.GetUser))
 	s.Router.PUT("/users/:id", middlewares.SetMiddlewareAuthentication(s.UpdateUser))
 	s.Router.DELETE("/users/:id", middlewares.SetMiddlewareAuthentication(s.DeleteUser))
-
 }

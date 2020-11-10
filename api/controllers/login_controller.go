@@ -5,15 +5,16 @@ import (
 	"io/ioutil"
 	"net/http"
 
+	"github.com/julienschmidt/httprouter"
 	"github.com/wesleymutwiri/gocommerce/api/auth"
 	"github.com/wesleymutwiri/gocommerce/api/models"
 	"github.com/wesleymutwiri/gocommerce/api/responses"
 	"github.com/wesleymutwiri/gocommerce/api/utils/formaterror"
-
 	"golang.org/x/crypto/bcrypt"
 )
 
-func (server *Server) Login(w http.ResponseWriter, r *http.Request) {
+
+func (server *Server) Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		responses.ERROR(w, http.StatusUnprocessableEntity, err)
